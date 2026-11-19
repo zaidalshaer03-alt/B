@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<title>SHADOW OPS — v2.6</title>
+<title>SHADOW OPS — v2.7</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -78,7 +78,7 @@ button{font-family:inherit;cursor:pointer}
 #hp-bar{position:relative;height:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:4px;overflow:hidden}
 #hp-trail{position:absolute;inset:0;width:100%;background:rgba(255,255,255,.5);transition:width .7s ease-out .2s}
 #hp-fill{position:relative;height:100%;width:100%;border-radius:4px;background:linear-gradient(90deg,var(--green),#00ffc8);box-shadow:0 0 12px var(--green);transition:width .25s,background .3s}
-#hp-num{font-size:22px;font-weight:bold;color:var(--green);margin-top:3px;text-shadow:0 0 14px var(--green)}
+#hp-num{font-size:20px;font-weight:bold;color:var(--green);margin-top:3px;text-shadow:0 0 14px var(--green)}
 #hp-wrap.danger #hp-fill{animation:hpPulse 1s infinite}
 @keyframes hpPulse{0%,100%{opacity:1}50%{opacity:.5}}
 #hp-wrap.hit #hp-fill,#hp-wrap.hit #hp-num{animation:hpHit .4s ease-out}
@@ -193,7 +193,6 @@ background:linear-gradient(150deg,rgba(18,6,10,.94),rgba(8,4,10,.94));border:1.5
 #boss-dir .arr{position:absolute;top:0;left:0;width:0;height:0;border-left:11px solid transparent;border-right:11px solid transparent;border-bottom:22px solid var(--red);filter:drop-shadow(0 0 10px #f00);transform-origin:0 120px;animation:bossDirPulse 1.2s ease-in-out infinite}
 @keyframes bossDirPulse{0%,100%{opacity:.9}50%{opacity:1}}
 
-/* إزاحة عناصر الواجهة أثناء وجود الزعيم — لا تداخل مع النقاط */
 body.boss-active #wave-progress{top:152px}
 body.boss-active #enemies-remaining{top:159px}
 body.boss-active #powerup{top:182px}
@@ -255,6 +254,8 @@ body.desktop #merc-commands{bottom:20px;left:20px}
 .box-head{position:sticky;top:0;padding:18px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(0,200,255,.1),transparent);text-align:center;z-index:2}
 .box-head h2{font-size:21px;letter-spacing:2px;color:var(--cyan)}
 .box.green .box-head h2{color:var(--green)}.box.gold .box-head h2{color:var(--gold)}.box.blue .box-head h2{color:#6fa8ff}
+.box-note{font-size:11px;color:var(--dim);margin-top:7px;line-height:1.8}
+.box-note b{color:var(--amber)}
 .box-body{padding:18px;max-height:66vh;overflow-y:auto}
 .close-btn{margin:14px 0 0;padding:13px 28px;background:rgba(255,51,68,.14);border:1px solid rgba(255,51,68,.6);color:#ff6b78;border-radius:9px;font-size:15px;font-weight:bold;width:100%;max-width:540px}
 .close-btn:active{transform:scale(.98)}
@@ -296,6 +297,8 @@ body.desktop #merc-commands{bottom:20px;left:20px}
 .merc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:8px}
 .merc-name{font-weight:bold;color:var(--gold);font-size:14px}
 .merc-hp{font-size:12px;color:var(--green);background:rgba(0,255,136,.1);padding:3px 8px;border-radius:5px}
+.merc-dmg{font-size:10.5px;color:var(--dim);margin-bottom:8px;line-height:1.7}
+.merc-dmg b{color:#ff9d6b}
 .cmdrow{display:flex;gap:6px}
 .cmd{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);color:#dbe6f5;padding:8px 4px;border-radius:7px;font-size:12px;font-weight:bold}
 .cmd.on[data-cmd=attack]{background:rgba(255,51,68,.25);border-color:var(--red);color:#ff8b95}
@@ -421,10 +424,10 @@ body.desktop #merc-commands{bottom:20px;left:20px}
 #load-tip b{color:var(--cyan)}
 #fatal{display:none;position:fixed;inset:0;z-index:9000;background:#04060e;color:#ff8b95;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;font-size:15px;line-height:2}
 
-#btn-start,#btn-diff,#btn-tut,.topbtn,.close-btn,.sec-title,.box-head h2,
+#btn-start,#btn-diff,#btn-tut,.topbtn,.close-btn,.sec-title,.box-head h2,.box-note,
 #countdown-label,#killstreak,#loot-notif,#achievement,.go-title,#btn-retry,
 #btn-new,#btn-reset,.pause-btn,#confirm-title,#confirm-msg,#confirm-yes,#confirm-no,
-.row-name,.row-desc,.wname,.wstats,.upinfo,.merc-name,.merc-hp,.cmd,.tut-tab,
+.row-name,.row-desc,.wname,.wstats,.upinfo,.merc-name,.merc-hp,.merc-dmg,.cmd,.tut-tab,
 .tut-row strong,.tut-row small,.tip,.diff-opt .nm,.diff-opt .ds,.empty,#load-tip,
 .setrow label,.toggle,.btn,.levelbar,.inv-item .n,.inv-item .d,.inv-item .a,
 .go-stat small,#lock-hint,#weapon-name,.kf,#fatal,#wave-sub,#chip-title,#chip-meta,
@@ -451,7 +454,7 @@ body.boss-active #killfeed{top:214px}
 #muzzle-hot{top:122px;right:122px;width:13px;height:13px}
 #minimap{width:92px;height:92px;bottom:16px}
 #killfeed{top:186px;left:10px;font-size:11px;max-width:52vw}
-#hp-wrap{bottom:300px;width:128px;right:12px}#hp-num{font-size:19px}
+#hp-wrap{bottom:300px;width:128px;right:12px}#hp-num{font-size:17px}
 #armor-wrap{bottom:266px;width:128px;right:12px}
 #btn-fire{right:18px;bottom:20px;width:90px;height:90px}
 #btn-fire .spark{width:48px;height:48px}
@@ -635,7 +638,8 @@ body.boss-active #powerup{top:164px}
 </div>
 
 <div id="mercui" class="panel"><div class="box gold">
-<div class="box-head"><h2>🪖 إدارة الفرقة</h2></div>
+<div class="box-head"><h2>🪖 إدارة الفرقة</h2>
+<div class="box-note">المرتزقة يسببون <b>نصف الضرر</b> للزعماء، ودرع الزعيم يمتص <b>٨٠٪</b> من رصاصهم · الزعماء يضربون المرتزقة بقوة مضاعفة — <b>أنت الضربة القاضية</b></div></div>
 <div class="box-body">
 <div class="sec"><div class="sec-title" style="color:var(--gold);border-color:rgba(255,215,0,.3)">النشطون في الميدان</div><div id="merc-active"></div></div>
 <div class="sec"><div class="sec-title" style="color:var(--gold);border-color:rgba(255,215,0,.3)">الاحتياط</div><div id="merc-reserve"></div></div>
@@ -683,7 +687,7 @@ body.boss-active #powerup{top:164px}
 <div class="tut-row"><span class="tut-ic">🕹️</span><div><strong>التحرك</strong><small>اسحب في الربع السفلي الأيسر من الشاشة</small></div></div>
 <div class="tut-row"><span class="tut-ic">🎥</span><div><strong>الكاميرا</strong><small>اسحب على النصف الأيمن للنظر وتدوير الكاميرا</small></div></div>
 <div class="tut-row"><span class="tut-ic">🔥</span><div><strong>الإطلاق</strong><small>زر الشرارة أسفل اليمين — استمر بالضغط للأسلحة الآلية</small></div></div>
-<div class="tut-row hot"><span class="tut-ic">◎</span><div><strong>تصويب دقيق (ADS)</strong><small>الزر الأزرق جنب الإطلاق — تقريب، دقة أعلى، **+١٥٪ فرصة إصابة حرجة**، ويلغي تلاشى ضرر الشوتجن بالمسافة</small></div></div>
+<div class="tut-row hot"><span class="tut-ic">◎</span><div><strong>تصويب دقيق (ADS)</strong><small>الزر الأزرق جنب الإطلاق — تقريب، دقة أعلى، +١٥٪ فرصة إصابة حرجة، ويلغي تلاشى ضرر الشوتجن بالمسافة</small></div></div>
 <div class="tut-row hot"><span class="tut-ic">🧎</span><div><strong>قرفصة</strong><small>الزر البرتقالي فوق القنبلة — ينزّلك خلف الصناديق وأكياس الرمل فعلياً ويقلّل دقة العدو عليك</small></div></div>
 <div class="tut-row"><span class="tut-ic">⟳</span><div><strong>التعمير</strong><small>أعد تعمير السلاح عند نفاد الذخيرة</small></div></div>
 <div class="tut-row"><span class="tut-ic">💣</span><div><strong>القنبلة</strong><small>ضرر منطقة واسع — لا تؤذيك</small></div></div>
@@ -705,16 +709,21 @@ body.boss-active #powerup{top:164px}
 <div class="tut-row"><span class="tut-ic">P/ESC</span><div><strong>إيقاف مؤقت</strong></div></div>
 </div>
 <div class="sec" style="margin-top:16px"><div class="sec-title" style="color:var(--gold);border-color:rgba(255,215,0,.3)">الزعماء — اقرأ هذا جيداً</div>
-<div class="tip">كل زعيم له **إنذار مرئي** قبل الهجوم: خط تصويب أو حلقة أرضية. مدة الإنذار حسب الصعوبة (١.٢ث سهل جداً → ٠.٥ث صعب جداً).</div>
+<div class="tip">كل زعيم له إنذار مرئي قبل الهجوم: خط تصويب أو حلقة أرضية. مدة الإنذار حسب الصعوبة (١.٢ث سهل جداً → ٠.٥ث صعب جداً).</div>
 <div class="tip">🔫 <b>رشقة مروحية</b>: ٥ طلقات ثقيلة في مروحة — تحرّك جانبياً أو اختبئ.</div>
 <div class="tip">💥 <b>قذيفة أرضية</b>: حلقة برتقالية تظهر على الأرض عند موقعك لحظة الإنذار — اخرج منها قبل الانفجار.</div>
-<div class="tip">🏃 <b>اندفاع</b>: خط أحمر ثم اندفاع سريع. قف بجانب عمود وخليه يخبطه → **يذهل ١.٥ ثانية ويأخذ ضرراً ×١.٥**.</div>
+<div class="tip">🏃 <b>اندفاع</b>: خط أحمر ثم اندفاع سريع. قف بجانب عمود وخليه يخبطه → يذهل ١.٥ ثانية ويأخذ ضرراً ×١.٥.</div>
 <div class="tip">⚡ <b>شعاع كاسح</b>: شعاع مرئي يمسح ٦٠° — اقطع خط الرؤية بعمود، الشعاع لا يخترق الجدران.</div>
 <div class="tip">بوابات الصحة عند ٦٦٪ و٣٣٪: لا يمكن تخطي مرحلة بضربة واحدة، وكل بوابة تستدعي حراساً مدرّعين.</div>
-<div class="tip">درع الزعيم يمتص ٦٠٪ من الضرر — ميزة «رصاص خارق» تخفض الامتصاص إلى ٣٥٪.</div>
-<div class="tip">☢ النواة: درعها **لا ينكسر أبداً** — «رصاص خارق» هو الحل الوحيد العملي.</div>
-<div class="tip">موت الزعيم يُنهي الموجة فوراً بموجة صادمة تقضي على كل حراسه.</div>
-<div class="tip">كل زعيم تقتله يمنحك **+١٠ صحة قصوى دائمة** حتى نهاية الجولة.</div>
+<div class="tip">درع الزعيم يمتص ٦٠٪ من ضررك — ميزة «رصاص خارق» تخفض الامتصاص إلى ٣٥٪.</div>
+<div class="tip">☢ النواة: درعها لا ينكسر أبداً — «رصاص خارق» هو الحل الوحيد العملي.</div>
+<div class="tip">موت الزعيم يُنهي الموجة فوراً بموجة صادمة تقضي على كل حراسه، ويمنحك +١٠ صحة قصوى دائمة.</div>
+</div>
+<div class="sec"><div class="sec-title" style="color:#ff9d6b;border-color:rgba(255,120,60,.3)">المرتزقة والزعماء — التوازن</div>
+<div class="tip">المرتزقة يسببون <b>نصف الضرر</b> للزعماء فقط — ضد الأعداء العاديين والحراس ضررهم كامل.</div>
+<div class="tip">درع الزعيم يمتص <b>٨٠٪</b> من رصاص المرتزقة (بدل ٦٠٪ من رصاصك). مع «رصاص خارق» تنخفض إلى ٥٥٪.</div>
+<div class="tip">الزعماء يضربون المرتزقة بقوة مضاعفة: طلقات ×٢.٢ · قذيفة ×١.٨ · اندفاع ×٢ · شعاع ×٢.٤.</div>
+<div class="tip">الخلاصة: المرتزقة يمتصون النار ويساعدون، لكن <b>أنت الضربة القاضية</b> على الزعيم — لا يمكن ركن اللعبة والانتظار.</div>
 </div>
 <div class="sec"><div class="sec-title" style="color:var(--gold);border-color:rgba(255,215,0,.3)">نصائح احترافية</div>
 <div class="tip">الأعداء المدرعون (أزرق) يظهرون من الموجة 7 — استخدم AK-47 أو M4A1.</div>
@@ -722,7 +731,7 @@ body.boss-active #powerup{top:164px}
 <div class="tip">الدرع الجلدي يمتص 20% والحديدي 50% من الضرر — وأصلحهما بدل شراء جديد.</div>
 <div class="tip">الارتداد بيرفع تصويبك مع الرش الطويل — اسحب لأسفل أو استخدم طلقات قصيرة.</div>
 <div class="tip">المرتزقة بيمتصوا رصاص العدو عنك — خليهم قدامك.</div>
-<div class="tip">القنابل لا تؤذيك — استخدمها على التجمعات.</div>
+<div class="tip">القنابل لا تؤذيك — استخدمها على التجمعات، وضررها على الزعيم كامل.</div>
 <div class="tip">طوّر المتجر لفتح أسلحة ومرتزقة أفضل، وبِع ما لا تستخدمه بنصف الثمن.</div>
 <div class="tip">عرض المتجر (-30%) يتغير كل موجتين/ثلاث/أربع حسب الصعوبة — استفد منه.</div>
 </div>
@@ -748,7 +757,7 @@ body.boss-active #powerup{top:164px}
 <button id="btn-start">ابدأ القتال</button>
 <button id="btn-diff">الصعوبة: متوسط</button>
 <button id="btn-tut">دليل اللعب</button>
-<div class="menu-ver">v2.6 // AEGIS CORP</div>
+<div class="menu-ver">v2.7 // AEGIS CORP</div>
 </div>
 
 <div id="gameover">
@@ -848,12 +857,14 @@ const rnd=(a,b)=>a+Math.random()*(b-a);
 const now=()=>performance.now();
 const isMobile=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)||(navigator.maxTouchPoints>0&&innerWidth<900);
 document.body.classList.add(isMobile?'mobile':'desktop');
-const FPS=60; // كل مؤقتات الزعيم تُخزَّن بالفريمات وتُطرح بـ dt
+const FPS=60;
 
 const CFG={SPEED:.022,BOOST:1.4,ARENA:36,WALL:10,ARMOR_WAVE:7,COMBO_MS:3000,POWER_MS:8000,GRE_R:6,GRE_DMG:90,
 FRICTION:.86,MAX_DMGNUM:15,AUTOSAVE:30000,RELOAD:1.8,COUNTDOWN:5000,MAX_DECALS:30,DECAL_LIFE:600,SPECIAL_EVERY:5,
 BOSS_CHARGE_FR:36,BOSS_STUN_FR:90,BOSS_BEAM_FR:48,BOSS_CHARGE_SPD:.34,BOSS_BEAM_LEN:26,BOSS_BEAM_ARC:Math.PI/3,
-BOSS_GROUND_R:8,BOSS_STUN_MUL:1.5,ELITE_PRICE:2350};
+BOSS_GROUND_R:8,BOSS_STUN_MUL:1.5,ELITE_PRICE:3800,
+MERC_VS_BOSS:.5,BOSS_ARMOR_MERC:.8,BOSS_ARMOR_MERC_PIERCE:.55,
+BOSS_VS_MERC:{bullet:2.2,ground:1.8,charge:2,beam:2.4}};
 
 const DIFF={
 very_easy:{name:'سهل جداً',icon:'🟢',color:'#00ff88',desc:'أعداء ضعفاء وقلة عدد',hp:.5,dmg:.4,count:.6,speed:.8,aim:.30,pts:.8,fire:.7,max:14,dealEvery:2,telegraph:1.2},
@@ -893,7 +904,7 @@ const CAST_TXT={burst:'🔫 يشحن رشقة مروحية!',ground:'💥 قذي
 const PHASE_TXT=['المرحلة ١ · الدرع','المرحلة ٢ · الاستدعاء','المرحلة ٣ · الغضب'];
 
 const PERKS={
-pierce:{n:'رصاص خارق',d:'يخفض امتصاص درع الزعيم ٦٠٪→٣٥٪ · +٢٠٪ على المدرّعين',ic:'🔩'},
+pierce:{n:'رصاص خارق',d:'امتصاص درع الزعيم: ٦٠٪→٣٥٪ لك · ٨٠٪→٥٥٪ للمرتزقة',ic:'🔩'},
 scav:{n:'لص ذخيرة',d:'25% استرجاع طلقة عند كل قتلة',ic:'🧲'},
 vamp:{n:'دموي',d:'+4 صحة لكل قتلة',ic:'🩸'},
 pocket:{n:'جيب إضافي',d:'حد القنابل 4 بدل 3',ic:'💣'},
@@ -931,7 +942,6 @@ let AC=null,master=null,noiseBuf=null;
 function initAudio(){if(AC)return;try{AC=new(window.AudioContext||window.webkitAudioContext)();master=AC.createGain();master.gain.value=settings.sound?.85:0;master.connect(AC.destination);
 noiseBuf=AC.createBuffer(1,AC.sampleRate,AC.sampleRate);const d=noiseBuf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;}catch(e){}}
 function applyMute(){if(master)master.gain.value=settings.sound?.85:0;
-D.bossBar.classList.toggle('muted',!settings.sound);
 D.btnMute.textContent=settings.sound?'🔊':'🔇';D.btnMute.classList.toggle('off',!settings.sound);}
 function haptic(ms){if(settings.haptic&&navigator.vibrate){try{navigator.vibrate(ms);}catch(e){}}}
 function noise(dur,freq,vol,type){const s=AC.createBufferSource(),g=AC.createGain(),f=AC.createBiquadFilter();s.buffer=noiseBuf;s.loop=true;f.type=type||'lowpass';f.frequency.value=freq;
@@ -1400,8 +1410,8 @@ const dp=Math.hypot(camera.position.x-pos.x,camera.position.z-pos.z);
 if(dp<CFG.BOSS_GROUND_R)takeDamage(Math.max(4,25*(1-dp/CFG.BOSS_GROUND_R))*d.dmg,pos);
 for(const m of gs.mercs){if(!m.alive)continue;
 const dm=Math.hypot(m.g.position.x-pos.x,m.g.position.z-pos.z);
-if(dm<CFG.BOSS_GROUND_R){m.hp-=Math.max(6,30*(1-dm/CFG.BOSS_GROUND_R))*d.dmg;m.hitT=10;
-drawBar(m.bar,Math.max(0,m.hp/m.maxHp));if(m.hp<=0)killMerc(m);}}}
+if(dm<CFG.BOSS_GROUND_R){m.hp-=Math.max(6,30*(1-dm/CFG.BOSS_GROUND_R))*CFG.BOSS_VS_MERC.ground*d.dmg;m.hitT=10;
+drawBar(m.bar,Math.max(0,m.hp/m.maxHp));burst(m.g.position,6,0x00ff88,0xffaa00);if(m.hp<=0)killMerc(m);}}}
 else if(atk==='charge'){
 en.bossChargeT=CFG.BOSS_CHARGE_FR;sfx('boss_charge');shake=Math.max(shake,.14);}
 else if(atk==='beam'){
@@ -1436,7 +1446,7 @@ return bRay.intersectObjects(obstacles,false).length===0;};
 if(test(camera.position,.7)){takeDamage(6*d.dmg,_b1);shake=Math.max(shake,.1);}
 for(const m of gs.mercs){if(!m.alive)continue;
 _b3.copy(m.g.position);_b3.y+=1.1;
-if(test(_b3,.65)){m.hp-=9*d.dmg;m.hitT=10;drawBar(m.bar,Math.max(0,m.hp/m.maxHp));
+if(test(_b3,.65)){m.hp-=9*CFG.BOSS_VS_MERC.beam*d.dmg;m.hitT=10;drawBar(m.bar,Math.max(0,m.hp/m.maxHp));
 burst(_b3,4,0x00ff88,0xffffff);if(m.hp<=0)killMerc(m);}}}
 if(en.bossBeamT<=0){fxDrop(en.fxBeam);en.fxBeam=null;en.bossAttackT=rnd(90,150)*(en.rage?.6:1);}
 return;}
@@ -1490,8 +1500,7 @@ const L=Math.hypot(dxp,dzp)||1;velX+=dxp/L*.28;velZ+=dzp/L*.28;
 shake=Math.max(shake,.3);en.bossChargeT=0;en.bossAttackT=rnd(80,130);}
 for(const m of gs.mercs){if(!m.alive)continue;
 const dxm=m.g.position.x-p.x,dzm=m.g.position.z-p.z;
-if(dxm*dxm+dxm*dxm+dxm*dxm<0){}
-if(dxm*dxm+dzm*dzm<1.6*1.6){m.hp-=30*d.dmg;m.hitT=12;
+if(dxm*dxm+dzm*dzm<1.6*1.6){m.hp-=30*CFG.BOSS_VS_MERC.charge*d.dmg;m.hitT=12;
 drawBar(m.bar,Math.max(0,m.hp/m.maxHp));burst(m.g.position,8,0x00ff88,0xffffff);
 if(m.hp<=0)killMerc(m);}}
 _v2.set(0,0,0);}
@@ -1551,7 +1560,7 @@ let hitMerc=false;
 for(const m of gs.mercs){if(!m.alive)continue;
 const mp=m.g.position,bp=b.m.position,rr=m.elite?.6:.55,dx=bp.x-mp.x,dz=bp.z-mp.z;
 if(dx*dx+dz*dz<rr*rr&&bp.y>mp.y+.1&&bp.y<mp.y+2.05){
-m.hp-=(b.boss?b.dmg*1.2:rnd(8,14))*mul;m.hitT=10;
+m.hp-=(b.boss?b.dmg*CFG.BOSS_VS_MERC.bullet:rnd(8,14))*mul;m.hitT=10;
 m.flash.emissive.setHex(0xff2200);m.flash.emissiveIntensity=.5;
 drawBar(m.bar,Math.max(0,m.hp/m.maxHp));
 burst(bp,b.boss?8:5,m.elite?0x00ff88:0x00ff44,0xffffff);sfx('hit');
@@ -1613,19 +1622,22 @@ function updateChains(){for(let i=chainBooms.length-1;i>=0;i--){const c=chainBoo
 chainBooms.splice(i,1);
 burst(c.pos,14,0xff6600,0xffaa00);puff(c.pos,.35,5,0x555555,.45);sfx('explosion');shake=Math.max(shake,.12);
 for(const en of enemies.slice()){if(!en.alive)continue;const d=en.g.position.distanceTo(c.pos);
-if(d<3)damageEnemy(en,Math.floor(30*(1-d/3)),false);}}}
+if(d<3)damageEnemy(en,Math.floor(30*(1-d/3)),false,false);}}}
 
 /* ---------- mercenaries ---------- */
+function mercStats(elite){
+const lead=hasPerk('leader')?1.3:1;
+const hp=Math.round((elite?300+Math.floor((gs.wave-1)*10):80+Math.floor((gs.wave-1)*4.8))*lead);
+const dmg=elite?{min:Math.round((60+Math.floor((gs.wave-1)*2))*lead),max:Math.round((85+Math.floor((gs.wave-1)*2.8))*lead)}
+:{min:Math.round((22+Math.floor((gs.wave-1)*.8))*lead),max:Math.round((30+Math.floor((gs.wave-1)*1.2))*lead)};
+return{hp,dmg};}
 function createMerc(elite){const b=elite?soldier(0x1e3320,0x14291a,0x00ff66,false):soldier(0x556b2f,0x1a1a1a,0x00cc44,false);
 const p=camera.position.clone();p.x+=rnd(-2.5,2.5);p.z+=rnd(-2.5,2.5);p.y=0;
 if(hits(p.x,p.z,.6)){p.x=camera.position.x;p.z=camera.position.z+1.5;}
 b.g.position.copy(p);scene.add(b.g);
-const lead=hasPerk('leader')?1.3:1;
-const hp=Math.round((elite?300+Math.floor((gs.wave-1)*10):80+Math.floor((gs.wave-1)*4.8))*lead);
-const m={g:b.g,legs:b.legs,flash:b.flash,bar:b.bar,hp,maxHp:hp,alive:true,elite,shootT:elite?35:25,hitT:0,
-dmg:elite?{min:Math.round((60+Math.floor((gs.wave-1)*2))*lead),max:Math.round((85+Math.floor((gs.wave-1)*2.8))*lead)}
-:{min:Math.round((22+Math.floor((gs.wave-1)*.8))*lead),max:Math.round((30+Math.floor((gs.wave-1)*1.2))*lead)},
-cmd:'auto',cmdEnd:0,icon:null,walk:0};
+const st=mercStats(elite);
+const m={g:b.g,legs:b.legs,flash:b.flash,bar:b.bar,hp:st.hp,maxHp:st.hp,alive:true,elite,shootT:elite?35:25,hitT:0,
+dmg:st.dmg,cmd:'auto',cmdEnd:0,icon:null,walk:0};
 gs.mercs.push(m);return m;}
 function killMerc(m){m.alive=false;if(m.icon){m.icon.remove();m.icon=null;}
 burst(m.g.position,m.elite?25:15,m.elite?0x00ff88:0x00ff00,0xffffff);sfx('death');
@@ -1639,7 +1651,7 @@ function updateABullets(){for(let i=aBullets.length-1;i>=0;i--){const b=aBullets
 if(segHit(_v3,b.m.position)){burst(b.m.position,b.elite?10:6,b.elite?0x00ff88:0x00ff00,0xffffff);scene.remove(b.m);aBullets.splice(i,1);continue;}
 let hit=false;
 for(const en of enemies){if(!en.alive)continue;if(b.m.position.distanceTo(en.g.position)<(en.boss?1.9:1.2)){
-damageEnemy(en,rnd(b.dmg.min,b.dmg.max),false);scene.remove(b.m);aBullets.splice(i,1);hit=true;break;}}
+damageEnemy(en,rnd(b.dmg.min,b.dmg.max),false,true);scene.remove(b.m);aBullets.splice(i,1);hit=true;break;}}
 if(!hit&&b.life<=0){scene.remove(b.m);aBullets.splice(i,1);}}}
 function updateMercs(){for(let i=gs.mercs.length-1;i>=0;i--){const m=gs.mercs[i];if(!m.alive)continue;
 if(m.cmdEnd>0&&now()>=m.cmdEnd){m.cmd='auto';m.cmdEnd=0;if(m.icon){m.icon.remove();m.icon=null;}}
@@ -1692,16 +1704,16 @@ else{toast('لا يوجد مرتزقة');sfx('empty');return;}
 mercUI();renderMercUI();saveGame();}
 
 /* ---------- combat ---------- */
-function damageEnemy(en,dmg,crit){
+function damageEnemy(en,dmg,crit,fromMerc){
+if(fromMerc&&en.boss)dmg*=CFG.MERC_VS_BOSS;
 let final;
 const armMul=en.armored?(hasPerk('pierce')?1.02:.85):1;
 if(en.boss&&en.armorMax>0){
 const bd=BOSSES[en.bossType];
-const absorbRate=hasPerk('pierce')?.35:.6;
+const absorbRate=fromMerc?(hasPerk('pierce')?CFG.BOSS_ARMOR_MERC_PIERCE:CFG.BOSS_ARMOR_MERC):(hasPerk('pierce')?.35:.6);
 let absorbed=dmg*absorbRate;
 if(bd.permanentArmor){en.armorHP=en.armorMax;sfx('armor_ping');}
-else{
-absorbed=Math.min(en.armorHP,absorbed);en.armorHP-=absorbed;sfx('armor_ping');
+else{absorbed=Math.min(en.armorHP,absorbed);en.armorHP-=absorbed;sfx('armor_ping');
 if(en.armorHP<=0){en.armorHP=0;sfx('armor_crack');toast('💥 درع الزعيم انكسر!');shake=Math.max(shake,.2);}}
 final=Math.floor((dmg-absorbed)*armMul);
 }else final=Math.floor(dmg*armMul);
@@ -1773,7 +1785,7 @@ rec.dmg+=d;rec.crit=rec.crit||crit;hitsMap.set(owner,rec);
 burst(hit.point,3,weak?0x00ffff:0xffaa00,0xff5500);}
 else{if(hit.face){_sgNorm.copy(hit.face.normal).transformDirection(hit.object.matrixWorld);_sgPoint.copy(hit.point);decal(_sgPoint,_sgNorm);}
 burst(hit.point,2,0x999999,0x666666);}}
-for(const [en,rec] of hitsMap)damageEnemy(en,Math.max(1,Math.round(rec.dmg)),rec.crit);
+for(const [en,rec] of hitsMap)damageEnemy(en,Math.max(1,Math.round(rec.dmg)),rec.crit,false);
 const ringEl=D.crosshair.querySelector('.ch-ring');
 if(ringEl){ringEl.style.transform='translate(-50%,-50%) scale(1.45)';ringEl.style.opacity='1';
 setTimeout(()=>{ringEl.style.transform='';ringEl.style.opacity='';},120);}
@@ -1815,7 +1827,7 @@ bd=sd;best=en;}
 if(best){const crit=Math.random()<cc;
 let d=base+Math.floor(Math.random()*w.dmg*.3);
 if(crit)d=Math.floor(d*1.6);
-damageEnemy(best,d,crit);return;}
+damageEnemy(best,d,crit,false);return;}
 ray.setFromCamera(_sgNDC.set(0,0),camera);ray.near=0;ray.far=range;
 const targets=obstacles.concat(enemies.filter(e=>e.alive).map(e=>e.g));
 const its=ray.intersectObjects(targets,true);
@@ -1827,7 +1839,7 @@ const weak=owner.boss&&its[0].object.geometry===GEO.visor;
 const crit=weak||Math.random()<cc;
 let d=base+Math.floor(Math.random()*w.dmg*.25);
 if(weak)d=Math.floor(d*2.5);else if(crit)d=Math.floor(d*1.6);
-damageEnemy(owner,d,crit);}
+damageEnemy(owner,d,crit,false);}
 else{if(its[0].face){const n=its[0].face.normal.clone().transformDirection(its[0].object.matrixWorld);decal(its[0].point,n);}
 burst(its[0].point,4,0x888888,0x666666);}}
 function startReload(){if(gs.reloading||gs.reserve<=0||gs.ammo===gs.maxAmmo||!gs.running)return;
@@ -1867,7 +1879,7 @@ g.t-=dt;if(g.t<=0){explode(g);grenades.splice(i,1);}}}
 function explode(g){scene.remove(g.m);const L=new THREE.PointLight(0xff6600,6,12);L.position.copy(g.pos);scene.add(L);setTimeout(()=>scene.remove(L),400);
 burst(g.pos,25,0xff6600,0xff8800);puff(g.pos,.5,16,0x444444,.6);shake=Math.max(shake,.35);haptic(80);sfx('explosion');
 for(const en of enemies.slice()){if(!en.alive)continue;const d=en.g.position.distanceTo(g.pos);
-if(d<CFG.GRE_R)damageEnemy(en,Math.floor(CFG.GRE_DMG*(1-d/CFG.GRE_R)),false);}
+if(d<CFG.GRE_R)damageEnemy(en,Math.floor(CFG.GRE_DMG*(1-d/CFG.GRE_R)),false,false);}
 setTimeout(()=>{if(gs.grenades<maxGre()){gs.grenades++;grenadeUI();}},8000);}
 function dropLoot(pos,rarity){let effect,name,color,dur=15000;
 if(rarity==='legendary'){effect='weapon';name='أسطوري';color='#ffd700';dur=45000;}
@@ -2270,8 +2282,9 @@ ah+='<div class="row"><div class="row-info"><div class="row-name">ذخيرة '+w
 D.shopAmmo.innerHTML=ah||'<div class="empty">لا توجد أسلحة مملوكة بعد</div>';
 const EP=CFG.ELITE_PRICE;
 const cM=shopPrice(800,'merc','normal'),cE=shopPrice(EP,'merc','elite'),cL=shopPrice(750,'armor','leather'),cI=shopPrice(1500,'armor','iron');
-let mh='<div class="row"><div class="row-info"><div class="row-name">مرتزق عادي'+(isDeal('merc','normal')?'<span class="deal-tag">-30%</span>':'')+'</div><div class="row-desc">'+Math.round((80+Math.floor((gs.wave-1)*4.8))*(hasPerk('leader')?1.3:1))+' صحة · يقاتل تلقائياً</div><div class="row-price">'+priceTag(800,'merc','normal')+'</div></div><button class="btn" data-act="merc"'+(gs.score<cM?' disabled':'')+'>شراء</button></div>';
-if(gs.shopLevel>=2)mh+='<div class="row"><div class="row-info"><div class="row-name">مرتزق نخبة'+(isDeal('merc','elite')?'<span class="deal-tag">-30%</span>':'')+'</div><div class="row-desc">'+Math.round((300+Math.floor((gs.wave-1)*10))*(hasPerk('leader')?1.3:1))+' صحة · ضرر مضاعف</div><div class="row-price">'+priceTag(EP,'merc','elite')+'</div></div><button class="btn gold" data-act="elite"'+(gs.score<cE?' disabled':'')+'>شراء</button></div>';
+const nSt=mercStats(false),eSt=mercStats(true);
+let mh='<div class="row"><div class="row-info"><div class="row-name">مرتزق عادي'+(isDeal('merc','normal')?'<span class="deal-tag">-30%</span>':'')+'</div><div class="row-desc">'+nSt.hp+' صحة · ضرر '+nSt.dmg.min+'–'+nSt.dmg.max+' · على الزعماء ×٠.٥</div><div class="row-price">'+priceTag(800,'merc','normal')+'</div></div><button class="btn" data-act="merc"'+(gs.score<cM?' disabled':'')+'>شراء</button></div>';
+if(gs.shopLevel>=2)mh+='<div class="row"><div class="row-info"><div class="row-name">مرتزق نخبة'+(isDeal('merc','elite')?'<span class="deal-tag">-30%</span>':'')+'</div><div class="row-desc">'+eSt.hp+' صحة · ضرر '+eSt.dmg.min+'–'+eSt.dmg.max+' · على الزعماء ×٠.٥</div><div class="row-price">'+priceTag(EP,'merc','elite')+'</div></div><button class="btn gold" data-act="elite"'+(gs.score<cE?' disabled':'')+'>شراء</button></div>';
 mh+='<div class="row"><div class="row-info"><div class="row-name">درع جلدي'+(isDeal('armor','leather')?'<span class="deal-tag">-30%</span>':'')+'</div><div class="row-desc">-20% ضرر · 40 نقطة تحمل</div><div class="row-price">'+priceTag(750,'armor','leather')+'</div></div><button class="btn blue" data-act="armor" data-key="leather"'+(gs.score<cL?' disabled':'')+'>شراء</button></div>';
 if(gs.shopLevel>=3)mh+='<div class="row"><div class="row-info"><div class="row-name">درع حديدي'+(isDeal('armor','iron')?'<span class="deal-tag">-30%</span>':'')+'</div><div class="row-desc">-50% ضرر · 100 نقطة تحمل</div><div class="row-price">'+priceTag(1500,'armor','iron')+'</div></div><button class="btn blue" data-act="armor" data-key="iron"'+(gs.score<cI?' disabled':'')+'>شراء</button></div>';
 D.shopMercs.innerHTML=mh;}
@@ -2305,10 +2318,12 @@ grenadeUI();perkChipsUI();}
 function renderMercUI(){const act=gs.mercs.filter(m=>m.alive);
 D.mercActive.innerHTML=act.length?act.map(m=>{const i=gs.mercs.indexOf(m);
 return'<div class="merc-card"><div class="merc-head"><span class="merc-name">'+(m.elite?'⭐ نخبة':'عادي')+'</span><span class="merc-hp">'+Math.ceil(m.hp)+'/'+m.maxHp+'</span></div>'+
+'<div class="merc-dmg">ضرر '+m.dmg.min+'–'+m.dmg.max+' · على الزعماء <b>'+Math.round(m.dmg.min*CFG.MERC_VS_BOSS)+'–'+Math.round(m.dmg.max*CFG.MERC_VS_BOSS)+'</b> قبل الدرع</div>'+
 '<div style="font-size:11px;color:var(--dim);margin-bottom:8px">الأمر: <b style="color:#fff">'+(m.cmd==='attack'?'هجوم':m.cmd==='defend'?'دفاع':m.cmd==='retreat'?'انسحاب':'تلقائي')+'</b></div>'+
 '<div class="cmdrow"><button class="cmd '+(m.cmd==='attack'?'on':'')+'" data-cmd="attack" data-i="'+i+'">هجوم</button><button class="cmd '+(m.cmd==='defend'?'on':'')+'" data-cmd="defend" data-i="'+i+'">دفاع</button><button class="cmd '+(m.cmd==='retreat'?'on':'')+'" data-cmd="retreat" data-i="'+i+'">انسحاب</button></div></div>';}).join(''):'<div class="empty">لا يوجد مرتزقة نشطون</div>';
-let r='';for(let i=0;i<gs.mercRes;i++)r+='<div class="merc-card"><div class="merc-head"><span class="merc-name">عادي</span></div><button class="btn" style="width:100%" data-deploy="normal">نشر في الميدان</button></div>';
-for(let i=0;i<gs.eliteRes;i++)r+='<div class="merc-card"><div class="merc-head"><span class="merc-name">⭐ نخبة</span></div><button class="btn gold" style="width:100%" data-deploy="elite">نشر في الميدان</button></div>';
+let r='';const nSt=mercStats(false),eSt=mercStats(true);
+for(let i=0;i<gs.mercRes;i++)r+='<div class="merc-card"><div class="merc-head"><span class="merc-name">عادي</span><span class="merc-hp">'+nSt.hp+' HP</span></div><div class="merc-dmg">ضرر '+nSt.dmg.min+'–'+nSt.dmg.max+'</div><button class="btn" style="width:100%" data-deploy="normal">نشر في الميدان</button></div>';
+for(let i=0;i<gs.eliteRes;i++)r+='<div class="merc-card"><div class="merc-head"><span class="merc-name">⭐ نخبة</span><span class="merc-hp">'+eSt.hp+' HP</span></div><div class="merc-dmg">ضرر '+eSt.dmg.min+'–'+eSt.dmg.max+'</div><button class="btn gold" style="width:100%" data-deploy="elite">نشر في الميدان</button></div>';
 D.mercReserve.innerHTML=r||'<div class="empty">الاحتياط فارغ — اشترِ من المتجر</div>';
 mercUI();}
 function renderSettings(){D.setSens.value=settings.sens;D.setSensVal.textContent=settings.sens.toFixed(2);
@@ -2422,14 +2437,15 @@ catch(e){D.btnStart.textContent='ابدأ القتال';}}
 
 /* ---------- flow ---------- */
 const TIPS=['كل 5 موجات: هدف خاص وجائزة ميزة دائمة',
+'المرتزقة يسببون نصف الضرر للزعماء — أنت الضربة القاضية',
+'درع الزعيم يمتص ٨٠٪ من رصاص المرتزقة و٦٠٪ من رصاصك',
 'الزعيم يُنذر قبل كل هجوم — خط أو حلقة على الأرض',
 'استدرج اندفاع الزعيم نحو عمود → يذهل ويأخذ ضرراً ×١.٥',
 'الشعاع الكاسح لا يخترق الجدران — اختبئ خلف عمود',
-'«رصاص خارق» يخفض امتصاص درع الزعيم من ٦٠٪ إلى ٣٥٪',
+'«رصاص خارق» يخفض امتصاص الدرع لك وللمرتزقة',
 'درع النواة لا ينكسر أبداً — «رصاص خارق» ضروري',
 'موت الزعيم ينهي الموجة فوراً ويمنحك +١٠ صحة قصوى',
-'ADS يمنح +١٥٪ فرصة إصابة حرجة لكل الأسلحة',
-'القرفصة تخليك خلف الصناديق فعلياً',
+'القنابل ضررها كامل على الزعماء — استغلها',
 'أصلح الدرع بنصف تحمّله مقابل ٣٠٪ من ثمنه'];
 let loadingTimer=null;
 function showLoading(cb){const el=D.loading;el.classList.add('on');
@@ -2632,4 +2648,4 @@ requestAnimationFrame(animate);
 })();}
 </script>
 </body>
-  </html>
+                                                                                                                                                     </html>
